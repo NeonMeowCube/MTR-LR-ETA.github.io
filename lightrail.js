@@ -1,3 +1,4 @@
+#LRT-ETA-SCRIPT by NeonMeowCube
 var station = 260;
 var response_json = "";
 var decode = "";
