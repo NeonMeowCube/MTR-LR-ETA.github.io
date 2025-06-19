@@ -70,6 +70,12 @@
                 flex-direction: row;
                 flex: 1 1 auto;
             }
+            #ColStation {
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+                flex: auto;
+            }
 
             @media screen and (orientation: portrait){
                 body {
@@ -247,9 +253,19 @@
                         </div>
                     </section>
                     <section class="station-line">
-                        <p>逐個逐個站</p>
-                        <div class="station-buttons">
-                        <button onclick="GetEachStation(507)">507</button>
+                        <div class="RowStation">
+                            <p>逐個逐個站</p>
+                            <div class="station-buttons">
+                            <button onclick="GetEachStation(507)">507</button>
+                            </div>
+                        </div>
+                        <div class="RowStation">
+                            <p>西鐵班次</p>
+                            <div class="station-buttons">
+                            <button onclick="GetHeavyRail('TML', 'TUM')">屯門</button>
+                            <button onclick="GetHeavyRail('TML', 'SIH')">兆康</button>
+                            <button onclick="GetHeavyRail('TML', 'TIS')">天水圍</button>
+                            </div>
                         </div>
                     </section>
                 </div>
