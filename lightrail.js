@@ -198,3 +198,50 @@ function ScheduleFormatList(stationArray, destArray, route_num) {
         document.getElementById('text').innerHTML = result;
     });
 }
+function GetHeavyRail(routeCode, stationCode) {
+    const url = `https://rt.data.gov.hk/v1/transport/mtr/getSchedule.php?line=${routeCode}&sta=${stationCode}`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error("Couldn't fetch heavy rail API!");
+            return response.json();
+        })
+        .then(data => {
+            let output = "";
+            let sysTime = data.sys_time || "未知系統時間";
+            let isDelay = data.isdelay === "Y" ? "⚠️ 有延誤" : "✅ 正常運行";
+
+            output += `系統時間: ${sysTime}<br>`;
+            output += `列車狀態: ${isDelay}<br><br>`;
+
+            for (const [key, section] of Object.entries(data.data)) {
+                const upTrains = section.UP || [];
+                const downTrains = section.DOWN || [];
+
+                output += `<strong>${key} - 上行:</strong><br>`;
+                if (upTrains.length > 0) {
+                    upTrains.forEach(train => {
+                        output += `目的地: ${train.dest} | 時間: ${train.time} | 月台: ${train.plat}<br>`;
+                    });
+                } else {
+                    output += `沒有資料<br>`;
+                }
+
+                output += `<br><strong>${key} - 下行:</strong><br>`;
+                if (downTrains.length > 0) {
+                    downTrains.forEach(train => {
+                        output += `目的地: ${train.dest} | 時間: ${train.time} | 月台: ${train.plat}<br>`;
+                    });
+                } else {
+                    output += `沒有資料<br>`;
+                }
+
+            }
+
+            document.getElementById("text").innerHTML = output;
+        })
+        .catch(error => {
+            console.error("Error fetching heavy rail data:", error);
+            document.getElementById("text").innerHTML = "無法載入列車資料";
+        });
+}
