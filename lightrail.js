@@ -1,4 +1,3 @@
-
 var station = 260;
 var response_json = "";
 var decode = "";
@@ -86,6 +85,7 @@ function formatSchedule(data) {
     
     result = ""; // Clear previous results
     result = "車站: " + GetStationName().getStationNames(station) + "<br>";
+    result = result + "System Time: " + data.system_time + "<br>";
     data.platform_list.forEach(function (platform) {
         console.log("Platform ".concat(platform.platform_id, ":"));
         result = result + platform.platform_id + " 號月台" + ":<br>";
