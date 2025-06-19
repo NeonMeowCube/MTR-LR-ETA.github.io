@@ -221,7 +221,7 @@ function GetHeavyRail(routeCode, stationCode) {
                 output += `<strong>${key} - 上行:</strong><br>`;
                 if (upTrains.length > 0) {
                     upTrains.forEach(train => {
-                        output += `目的地: ${train.dest} | 時間: ${train.time} | 月台: ${train.plat}<br>`;
+                        output += `Dest: ${train.dest} | Time: ${train.time.substring(11)} | Plat: ${train.plat}<br>`;
                     });
                 } else {
                     output += `沒有資料<br>`;
