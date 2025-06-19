@@ -209,7 +209,7 @@ function GetHeavyRail(routeCode, stationCode) {
         .then(data => {
             let output = "";
             let sysTime = data.sys_time || "未知系統時間";
-            let isDelay = data.isdelay === "Y" ? "⚠️ 有延誤" : "✅ 正常運行";
+            let isDelay = data.isdelay === "Y" ? "⚠️ 出事，上網睇下咩料先" : "✅ 無事";
 
             output += `系統時間: ${sysTime}<br>`;
             output += `列車狀態: ${isDelay}<br><br>`;
